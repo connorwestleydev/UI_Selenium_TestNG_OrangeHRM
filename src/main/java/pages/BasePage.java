@@ -18,6 +18,10 @@ public class BasePage {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
     }
 
+    public String getPageURL() {
+        return driver.getCurrentUrl();
+    }
+
     public WebElement getElement(By locator) {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }

@@ -4,7 +4,7 @@ import base.BaseTests;
 import org.testng.annotations.Test;
 import pages.DashboardPage;
 
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class LoginTests extends BaseTests {
 
@@ -13,6 +13,6 @@ public class LoginTests extends BaseTests {
         loginPage.enterUsername("Admin");
         loginPage.enterPassword("admin123");
         DashboardPage dashboardPage = loginPage.clickLoginButton();
-        assertEquals(dashboardPage.getActiveMenuText(), "Dashboard", "Dashboard page not selected");
+        assertTrue(dashboardPage.getPageURL().contains("dashboard"), "Not redirected to dashboard page");
     }
 }
