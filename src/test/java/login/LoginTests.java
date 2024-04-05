@@ -1,7 +1,6 @@
 package login;
 
 import base.BaseTests;
-import jdk.jfr.Description;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.DashboardPage;
