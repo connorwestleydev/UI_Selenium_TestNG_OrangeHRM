@@ -1,6 +1,7 @@
 package dashboard;
 
 import base.BaseTests;
+import base.BaseTests_LoginLogout;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -11,20 +12,7 @@ import pages.HelpPage;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class DashboardTests extends BaseTests {
-
-    private DashboardPage dashboardPage;
-
-    @BeforeMethod
-    public void login() {
-        this.loginPage.enterCredentials("admin", "admin123");
-        this.dashboardPage = loginPage.clickLoginButton();
-    }
-
-    @AfterMethod
-    public void logout() {
-        dashboardPage.logout();
-    }
+public class DashboardTests extends BaseTests_LoginLogout {
 
     @Test
     public void testEmployeeLeaveConfigChange() {
