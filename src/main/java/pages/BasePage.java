@@ -1,9 +1,6 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -42,6 +39,24 @@ public class BasePage {
     protected void clearField(By locator) {
         while(!getValue(locator).isEmpty()) {
             getElement(locator).sendKeys(Keys.BACK_SPACE);
+        }
+    }
+
+    public int getTabCount() {
+        return driver.getWindowHandles().size();
+    }
+
+
+    /**
+     * Switches to the first tab that isn't the current tab
+     */
+    protected void switchTab() {
+        String originalTab = driver.getWindowHandle();
+
+        for (String windowHandle : driver.getWindowHandles()) {
+            if (!originalTab.equals(windowHandle)) {
+                driver.switchTo().window(windowHandle);
+            }
         }
     }
 }

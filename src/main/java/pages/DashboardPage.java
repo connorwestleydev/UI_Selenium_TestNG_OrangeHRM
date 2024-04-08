@@ -8,6 +8,7 @@ public class DashboardPage extends BasePage {
     private By headerBreadcrumb = By.cssSelector(".oxd-topbar-header-breadcrumb-module");
     private By userDropdown = By.cssSelector(".oxd-userdropdown");
     private By logoutLink = By.linkText("Logout");
+    private By helpButton = By.cssSelector(".oxd-topbar-body-nav-slot .oxd-icon-button");
     private By employeeLeaveCogIcon = By.cssSelector(".orangehrm-leave-card-icon");
     private By configModalSwitchToggle = By.cssSelector(".orangehrm-dialog-modal .oxd-switch-input");
     private By configModalSaveButton = By.cssSelector(".orangehrm-dialog-modal button[type=submit]");
@@ -44,5 +45,20 @@ public class DashboardPage extends BasePage {
 
     public boolean isSuccessNotificationDisplayed() {
         return getElement(successNotification).isDisplayed();
+    }
+
+    public void clickHelpButton() {
+        clickElement(helpButton);
+    }
+
+    public HelpPage switchToHelpPageTab() {
+        switchTab();
+
+        HelpPage helpPage = new HelpPage(driver);
+        if (helpPage.isAdminGuideLinkDisplayed()) {
+            return helpPage;
+        }
+
+        return null;
     }
 }
