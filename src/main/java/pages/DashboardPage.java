@@ -15,6 +15,7 @@ public class DashboardPage extends BasePage {
     private By configModalSaveButton = By.cssSelector(".orangehrm-dialog-modal button[type=submit]");
     private By successNotification = By.cssSelector("#oxd-toaster_1 .oxd-toast--success");
     private By buzzPosts = By.cssSelector(".orangehrm-buzz-widget-header-text");
+    private By navBarMyInfo = By.linkText("My Info");
 
     public DashboardPage(WebDriver driver) {
         super(driver);
@@ -73,5 +74,10 @@ public class DashboardPage extends BasePage {
         WebElement buzzPost = getElements(buzzPosts).get(index - 1);
         buzzPost.click();
         return new BuzzPage(driver);
+    }
+
+    public PersonalDetailsPage navigateToPersonalDetailsPage() {
+        clickElement(navBarMyInfo);
+        return new PersonalDetailsPage(driver);
     }
 }
