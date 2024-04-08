@@ -4,6 +4,7 @@ import base.BaseTests;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import pages.BuzzPage;
 import pages.DashboardPage;
 import pages.HelpPage;
 
@@ -42,8 +43,9 @@ public class DashboardTests extends BaseTests {
         dashboardPage = helpPage.switchToDashboardPageTab();
     }
 
-//    @Test
-//    public void testEmployeeByDeptChartShowsTooltipOnHover() {
-//
-//    }
+    @Test
+    public void testClickingBuzzPostNavigatesToBuzzPage() {
+        BuzzPage buzzPage = dashboardPage.clickBuzzPost(1);
+        assertTrue(buzzPage.isNewsfeedTitleVisible(), "Newsfeed is not displayed");
+    }
 }

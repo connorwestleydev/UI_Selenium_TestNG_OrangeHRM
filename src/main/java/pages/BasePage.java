@@ -5,6 +5,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 public class BasePage {
 
@@ -18,6 +19,10 @@ public class BasePage {
 
     protected WebElement getElement(By locator) {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
+    protected List<WebElement> getElements(By locator) {
+        return wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
     }
 
     protected String getText(By locator) {
@@ -45,7 +50,6 @@ public class BasePage {
     public int getTabCount() {
         return driver.getWindowHandles().size();
     }
-
 
     /**
      * Switches to the first tab that isn't the current tab
