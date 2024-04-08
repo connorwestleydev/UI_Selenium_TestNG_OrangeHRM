@@ -1,12 +1,8 @@
 package dashboard;
 
-import base.BaseTests;
 import base.BaseTests_LoginLogout;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.BuzzPage;
-import pages.DashboardPage;
 import pages.HelpPage;
 
 import static org.testng.Assert.assertEquals;
