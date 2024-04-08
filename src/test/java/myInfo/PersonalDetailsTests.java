@@ -1,6 +1,7 @@
 package myInfo;
 
 import base.BaseTests;
+import base.BaseTests_LoginLogout;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -9,20 +10,7 @@ import pages.PersonalDetailsPage;
 
 import static org.testng.Assert.assertEquals;
 
-public class PersonalDetailsTests extends BaseTests {
-
-    private DashboardPage dashboardPage;
-
-    @BeforeMethod
-    public void login() {
-        this.loginPage.enterCredentials("admin", "admin123");
-        this.dashboardPage = loginPage.clickLoginButton();
-    }
-
-    @AfterMethod
-    public void logout() {
-        dashboardPage.logout();
-    }
+public class PersonalDetailsTests extends BaseTests_LoginLogout {
 
     @Test
     public void testNationalitySelection() {
