@@ -25,11 +25,11 @@ public class LoginPage extends BasePage {
     }
 
     private void enterUsername(String username) {
-        enterText(usernameField, username);
+        setText(usernameField, username);
     }
 
     private void enterPassword(String password) {
-        enterText(passwordField, password);
+        setText(passwordField, password);
     }
 
     public DashboardPage clickLoginButton() {
