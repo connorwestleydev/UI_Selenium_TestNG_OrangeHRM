@@ -2,7 +2,6 @@ package myInfo;
 
 import base.BaseTests_LoginLogout;
 import org.testng.annotations.Test;
-import pages.PersonalDetailsPage;
 
 import static org.testng.Assert.assertEquals;
 
@@ -10,7 +9,7 @@ public class PersonalDetailsTests extends BaseTests_LoginLogout {
 
     @Test
     public void testNationalitySelection() {
-        PersonalDetailsPage personalDetailsPage = dashboardPage.navigateToPersonalDetailsPage();
+        var personalDetailsPage = dashboardPage.navigateToPersonalDetailsPage();
         personalDetailsPage.clickNationalityDropDown();
         String nationality = "British";
         personalDetailsPage.selectNationality(nationality);

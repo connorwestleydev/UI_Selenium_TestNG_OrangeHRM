@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -11,6 +12,7 @@ public class BasePage {
 
     protected WebDriver driver;
     protected WebDriverWait wait;
+    private By successNotification = By.cssSelector("#oxd-toaster_1 .oxd-toast--success");
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
@@ -45,6 +47,10 @@ public class BasePage {
         while(!getValue(locator).isEmpty()) {
             getElement(locator).sendKeys(Keys.BACK_SPACE);
         }
+    }
+
+    public boolean isSuccessNotificationDisplayed() {
+        return getElement(successNotification).isDisplayed();
     }
 
     public int getTabCount() {

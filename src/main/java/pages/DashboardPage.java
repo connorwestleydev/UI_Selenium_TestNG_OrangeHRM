@@ -13,7 +13,6 @@ public class DashboardPage extends BasePage {
     private By employeeLeaveCogIcon = By.cssSelector(".orangehrm-leave-card-icon");
     private By configModalSwitchToggle = By.cssSelector(".orangehrm-dialog-modal .oxd-switch-input");
     private By configModalSaveButton = By.cssSelector(".orangehrm-dialog-modal button[type=submit]");
-    private By successNotification = By.cssSelector("#oxd-toaster_1 .oxd-toast--success");
     private By buzzPosts = By.cssSelector(".orangehrm-buzz-widget-header-text");
     private By navBarMyInfo = By.linkText("My Info");
 
@@ -44,10 +43,6 @@ public class DashboardPage extends BasePage {
 
     public void clickConfigModalSaveButton() {
         clickElement(configModalSaveButton);
-    }
-
-    public boolean isSuccessNotificationDisplayed() {
-        return getElement(successNotification).isDisplayed();
     }
 
     public void clickHelpButton() {
