@@ -33,7 +33,7 @@ public class BasePage {
         return getElement(locator).getAttribute("value");
     }
 
-    protected void enterText(By locator, String text) {
+    protected void setText(By locator, String text) {
         getElement(locator).sendKeys(text);
     }
 
