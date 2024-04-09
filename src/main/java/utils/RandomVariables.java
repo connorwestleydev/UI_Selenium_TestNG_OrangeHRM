@@ -5,9 +5,9 @@ import java.util.Random;
 public class RandomVariables {
 
     /**
-     * Generates a random string consisting of alphanumeric characters and
-     * the following special characaters [space],!,#,@
-     * @return
+     * Generates a random 40-character string consisting of alphanumeric
+     * characters and the following special characters [space],!,#,@
+     * @return randomly generated string
      */
     public static String getRandomString() {
         return new Random().ints(1, 128)
