@@ -110,5 +110,10 @@ public class BuzzPage extends BasePage {
 
     public void clickModalPostButton() {
         clickElement(buzzPostModalPostButton);
+        getElement(buzzPostEditTextArea).sendKeys(text);
+    }
+
+    public void clickModalPostButton() {
+        getElement(buzzPostModalPostButton).click();
     }
 }
