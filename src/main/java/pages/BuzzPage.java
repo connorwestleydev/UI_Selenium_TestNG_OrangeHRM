@@ -30,15 +30,15 @@ public class BuzzPage extends BasePage {
     }
 
     public void clickBuzzPostNavLink() {
-        getElement(buzzPostNavLink).click();
+        clickElement(buzzPostNavLink);
     }
 
     public void setBuzzPostText(String text) {
-        getElement(buzzPostTextArea).sendKeys(text);
+        setText(buzzPostTextArea, text);
     }
 
     public void clickPostButton() {
-        getElement(buzzPostButton).click();
+        clickElement(buzzPostButton);
     }
 
     public void createBuzzPost(String postText) {
@@ -105,7 +105,12 @@ public class BuzzPage extends BasePage {
     }
 
     public void setEditPostText(String text) {
-            getElement(buzzPostEditTextArea).sendKeys(text);
+        setText(buzzPostEditTextArea, text);
+    }
+
+    public void clickModalPostButton() {
+        clickElement(buzzPostModalPostButton);
+        getElement(buzzPostEditTextArea).sendKeys(text);
     }
 
     public void clickModalPostButton() {
