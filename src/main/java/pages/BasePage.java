@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class BasePage {
 
@@ -68,5 +69,18 @@ public class BasePage {
                 driver.switchTo().window(windowHandle);
             }
         }
+    }
+
+    protected void clickElementFromListByText(By locator, String text) {
+        List<WebElement> elements = getElements(locator);
+
+        for (WebElement element : elements) {
+            if (element.getText().contains(text)) {
+                element.click();
+                return;
+            }
+        }
+
+        throw new NoSuchElementException("Element with the text " + text + " was not found");
     }
 }
