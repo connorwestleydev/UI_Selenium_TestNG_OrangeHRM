@@ -19,7 +19,8 @@ public class BuzzPage extends BasePage {
     By buzzPostConfigButtons = By.cssSelector(".orangehrm-buzz-post-header-config .oxd-icon-button");
     By buzzPostConfigMenuItems = By.cssSelector(".orangehrm-buzz-post-header-config-item");
     By buzzPostEditTextArea = By.cssSelector(".orangehrm-buzz-post-modal-header-text .oxd-buzz-post-input");
-    By buzzPostModalPostButton = By.cssSelector(".orangehrm-dialog-modal .oxd-button");
+    By buzzPostEditModalPostButton = By.cssSelector(".orangehrm-dialog-modal .oxd-button");
+    By deleteModalButtons = By.cssSelector(".orangehrm-dialog-popup .oxd-button");
 
     public BuzzPage(WebDriver driver) {
         super(driver);
@@ -74,9 +75,19 @@ public class BuzzPage extends BasePage {
     public void editBuzzPost(int index, String text) {
         if (isAtLeastOneBuzzPostPresent()) {
             clickBuzzPostConfigButton(index - 1);
-            clickBuzzPostConfigMenuItem("Edit");
+            clickElementFromListByText(buzzPostConfigMenuItems, "Edit Post");
             setEditPostText(text);
             clickModalPostButton();
+        } else {
+            throw new NoSuchElementException("No buzz posts are present");
+        }
+    }
+
+    public void deleteBuzzPost(int index, String modalOption) {
+        if (isAtLeastOneBuzzPostPresent()) {
+            clickBuzzPostConfigButton(index - 1);
+            clickElementFromListByText(buzzPostConfigMenuItems, "Delete Post");
+            clickElementFromListByText(deleteModalButtons, modalOption);
         } else {
             throw new NoSuchElementException("No buzz posts are present");
         }
@@ -91,29 +102,11 @@ public class BuzzPage extends BasePage {
         configButton.click();
     }
 
-    public void clickBuzzPostConfigMenuItem(String menuItem) {
-        List<WebElement> configMenuItems = getElements(buzzPostConfigMenuItems);
-
-        for (WebElement configMenuItem : configMenuItems) {
-            if (configMenuItem.getText().contains(menuItem)) {
-                configMenuItem.click();
-                return;
-            }
-        }
-
-        throw new NoSuchElementException("Menu item with the text " + menuItem + " was not found");
-    }
-
     public void setEditPostText(String text) {
         setText(buzzPostEditTextArea, text);
     }
 
     public void clickModalPostButton() {
-        clickElement(buzzPostModalPostButton);
-        getElement(buzzPostEditTextArea).sendKeys(text);
-    }
-
-    public void clickModalPostButton() {
-        getElement(buzzPostModalPostButton).click();
+        clickElement(buzzPostEditModalPostButton);
     }
 }
