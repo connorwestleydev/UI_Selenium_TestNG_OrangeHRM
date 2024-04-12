@@ -3,7 +3,6 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -91,6 +90,23 @@ public class BuzzPage extends BasePage {
         }
     }
 
+    /**
+     * Edits buzz post by adding randomly generated text
+     * @param index starts at 1 (i.e. the first post)
+     * @return randomly generated text added to post
+     */
+    public String editBuzzPostAddingRandomText(int index) {
+        String randomString = getRandomString();
+        editBuzzPost(index, randomString);
+        return randomString;
+    }
+
+    /**
+     * Selects delete option on modal config dropdown and then clicks the
+     * specified modal option (either cancel or delete)
+     * @param index starts at 1 (i.e. the first post)
+     * @param modalOption the option to click (cancel or delete)
+     */
     public void deleteBuzzPost(int index, String modalOption) {
         if (isAtLeastOneBuzzPostPresent()) {
             clickBuzzPostConfigButton(index - 1);

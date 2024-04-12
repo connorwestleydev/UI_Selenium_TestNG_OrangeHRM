@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 import pages.BuzzPage;
 
 import static org.testng.Assert.*;
-import static utils.RandomVariables.getRandomString;
 
 
 public class BuzzTests extends BaseTests_LoginLogout {
@@ -35,9 +34,7 @@ public class BuzzTests extends BaseTests_LoginLogout {
     public void testEditTextOfNewBuzzPostIsSuccessful() {
         buzzPage.createBuzzPostWithRandomText();
         buzzPage.clickBuzzPostNavLink();
-
-        String newText = getRandomString();
-        buzzPage.editBuzzPost(1, newText);
+        buzzPage.editBuzzPostAddingRandomText(1);
 
         assertTrue(buzzPage.isSuccessNotificationDisplayed(), "Edit post not successful");
     }
@@ -48,10 +45,9 @@ public class BuzzTests extends BaseTests_LoginLogout {
         buzzPage.clickBuzzPostNavLink();
 
         int firstPost = 1;
-        String newText = getRandomString();
-        buzzPage.editBuzzPost(firstPost, newText);
+        String addedText = buzzPage.editBuzzPostAddingRandomText(firstPost);
 
-        assertTrue(buzzPage.isTextPresentInBuzzPost(firstPost, newText),
+        assertTrue(buzzPage.isTextPresentInBuzzPost(firstPost, addedText),
                 "Edited post does not contain new text");
     }
 
