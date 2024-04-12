@@ -1,6 +1,7 @@
 package buzz;
 
 import base.BaseTests_LoginLogout;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.BuzzPage;
 
@@ -10,27 +11,29 @@ import static utils.RandomVariables.getRandomString;
 
 public class BuzzTests extends BaseTests_LoginLogout {
 
+    private BuzzPage buzzPage;
+
+    @BeforeMethod
+    public void setUpBuzzPage() {
+        buzzPage = dashboardPage.clickBuzzPost(1);
+    }
+
     @Test
     public void testBuzzPostWithTextOnlyIsSuccessful() {
-        BuzzPage buzzPage = dashboardPage.clickBuzzPost(1);
-        String postText = getRandomString();
-        buzzPage.createBuzzPost(postText);
+        buzzPage.createBuzzPostWithRandomText();
         assertTrue(buzzPage.isSuccessNotificationDisplayed(), "Post not successful");
     }
 
     @Test
     public void testNewBuzzPostAppearsInFeed() {
-        BuzzPage buzzPage = dashboardPage.clickBuzzPost(1);
-        String postText = getRandomString();
-        buzzPage.createBuzzPost(postText);
+        String postText = buzzPage.createBuzzPostWithRandomText();
         buzzPage.clickBuzzPostNavLink();
         assertEquals(buzzPage.getBuzzPostText(1), postText, "First post text is not correct");
     }
 
     @Test
     public void testEditTextOfNewBuzzPostIsSuccessful() {
-        BuzzPage buzzPage = dashboardPage.clickBuzzPost(1);
-        buzzPage.createBuzzPost(getRandomString());
+        buzzPage.createBuzzPostWithRandomText();
         buzzPage.clickBuzzPostNavLink();
 
         String newText = getRandomString();
@@ -41,8 +44,7 @@ public class BuzzTests extends BaseTests_LoginLogout {
 
     @Test
     public void testEditTextOfNewBuzzPostAppearsInFeed() {
-        BuzzPage buzzPage = dashboardPage.clickBuzzPost(1);
-        buzzPage.createBuzzPost(getRandomString());
+        buzzPage.createBuzzPostWithRandomText();
         buzzPage.clickBuzzPostNavLink();
 
         int firstPost = 1;
@@ -55,8 +57,7 @@ public class BuzzTests extends BaseTests_LoginLogout {
 
     @Test
     public void testDeletionOfNewBuzzPostIsSuccessful() {
-        BuzzPage buzzPage = dashboardPage.clickBuzzPost(1);
-        buzzPage.createBuzzPost(getRandomString());
+        buzzPage.createBuzzPostWithRandomText();
         buzzPage.clickBuzzPostNavLink();
 
         buzzPage.deleteBuzzPost(1, "Delete");
@@ -65,9 +66,7 @@ public class BuzzTests extends BaseTests_LoginLogout {
 
     @Test
     public void testDeletedNewPostIsNotPresentInFeed() {
-        BuzzPage buzzPage = dashboardPage.clickBuzzPost(1);
-        String text = getRandomString();
-        buzzPage.createBuzzPost(text);
+        String text = buzzPage.createBuzzPostWithRandomText();
         buzzPage.clickBuzzPostNavLink();
 
         int firstPost = 1;
@@ -78,9 +77,7 @@ public class BuzzTests extends BaseTests_LoginLogout {
 
     @Test
     public void testCancelDeletionKeepsPostInFeed() {
-        BuzzPage buzzPage = dashboardPage.clickBuzzPost(1);
-        String text = getRandomString();
-        buzzPage.createBuzzPost(text);
+        String text = buzzPage.createBuzzPostWithRandomText();
         buzzPage.clickBuzzPostNavLink();
 
         int firstPost = 1;
