@@ -1,7 +1,6 @@
 package pages;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -71,6 +70,11 @@ public class BasePage {
         }
     }
 
+    /**
+     * Clicks the first element from a list of elements with the specified text
+     * @param locator By variable to locate the matching elements
+     * @param text The text to look for within the elements
+     */
     protected void clickElementFromListByText(By locator, String text) {
         List<WebElement> elements = getElements(locator);
 
