@@ -8,6 +8,8 @@ import org.openqa.selenium.interactions.Actions;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import static utils.RandomVariables.getRandomString;
+
 public class BuzzPage extends BasePage {
 
     By buzzPostNavLink = By.linkText("Buzz");
@@ -45,6 +47,12 @@ public class BuzzPage extends BasePage {
     public void createBuzzPost(String postText) {
         setBuzzPostText(postText);
         clickPostButton();
+    }
+
+    public String createBuzzPostWithRandomText() {
+        String randomString = getRandomString();
+        createBuzzPost(randomString);
+        return randomString;
     }
 
     /**
