@@ -12,17 +12,17 @@ import static utils.RandomVariables.getRandomString;
 
 public class BuzzPage extends BasePage {
 
-    By buzzPostNavLink = By.linkText("Buzz");
-    By newsfeedTitle = By.cssSelector(".orangehrm-buzz-newsfeed-title");
-    By buzzPostTextArea = By.cssSelector(".oxd-buzz-post-input");
-    By buzzPostButton = By.cssSelector(".oxd-buzz-post .oxd-button");
-    By buzzPostsText = By.cssSelector(".orangehrm-buzz-post-body-text");
-    By buzzPosts = By.cssSelector(".orangehrm-buzz-post");
-    By buzzPostConfigButtons = By.cssSelector(".orangehrm-buzz-post-header-config .oxd-icon-button");
-    By buzzPostConfigMenuItems = By.cssSelector(".orangehrm-buzz-post-header-config-item");
-    By buzzPostEditTextArea = By.cssSelector(".orangehrm-buzz-post-modal-header-text .oxd-buzz-post-input");
-    By buzzPostEditModalPostButton = By.cssSelector(".orangehrm-dialog-modal .oxd-button");
-    By deleteModalButtons = By.cssSelector(".orangehrm-dialog-popup .oxd-button");
+    private By buzzNavLink = By.linkText("Buzz");
+    private By newsfeedTitle = By.cssSelector(".orangehrm-buzz-newsfeed-title");
+    private By postTextArea = By.cssSelector(".oxd-buzz-post-input");
+    private By postButton = By.cssSelector(".oxd-buzz-post .oxd-button");
+    private By postsText = By.cssSelector(".orangehrm-buzz-post-body-text");
+    private By posts = By.cssSelector(".orangehrm-buzz-post");
+    private By postConfigButtons = By.cssSelector(".orangehrm-buzz-post-header-config .oxd-icon-button");
+    private By postConfigMenuItems = By.cssSelector(".orangehrm-buzz-post-header-config-item");
+    private By editTextArea = By.cssSelector(".orangehrm-buzz-post-modal-header-text .oxd-buzz-post-input");
+    private By editModalPostButton = By.cssSelector(".orangehrm-dialog-modal .oxd-button");
+    private By deleteModalButtons = By.cssSelector(".orangehrm-dialog-popup .oxd-button");
 
     public BuzzPage(WebDriver driver) {
         super(driver);
@@ -33,15 +33,15 @@ public class BuzzPage extends BasePage {
     }
 
     public void clickBuzzPostNavLink() {
-        clickElement(buzzPostNavLink);
+        clickElement(buzzNavLink);
     }
 
     public void setBuzzPostText(String text) {
-        setText(buzzPostTextArea, text);
+        setText(postTextArea, text);
     }
 
     public void clickPostButton() {
-        clickElement(buzzPostButton);
+        clickElement(postButton);
     }
 
     public void createBuzzPost(String postText) {
@@ -61,7 +61,7 @@ public class BuzzPage extends BasePage {
      * @return body text of the buzz post
      */
     public String getBuzzPostText(int index) {
-        List<WebElement> buzzPosts = getElements(buzzPostsText);
+        List<WebElement> buzzPosts = getElements(postsText);
         return buzzPosts.get(index - 1).getText();
     }
 
@@ -83,7 +83,7 @@ public class BuzzPage extends BasePage {
     public void editBuzzPost(int index, String text) {
         if (isAtLeastOneBuzzPostPresent()) {
             clickBuzzPostConfigButton(index - 1);
-            clickElementFromListByText(buzzPostConfigMenuItems, "Edit Post");
+            clickElementFromListByText(postConfigMenuItems, "Edit Post");
             setEditPostText(text);
             clickModalPostButton();
         } else {
@@ -94,7 +94,7 @@ public class BuzzPage extends BasePage {
     public void deleteBuzzPost(int index, String modalOption) {
         if (isAtLeastOneBuzzPostPresent()) {
             clickBuzzPostConfigButton(index - 1);
-            clickElementFromListByText(buzzPostConfigMenuItems, "Delete Post");
+            clickElementFromListByText(postConfigMenuItems, "Delete Post");
             clickElementFromListByText(deleteModalButtons, modalOption);
         } else {
             throw new NoSuchElementException("No buzz posts are present");
@@ -102,19 +102,19 @@ public class BuzzPage extends BasePage {
     }
 
     public boolean isAtLeastOneBuzzPostPresent() {
-        return getElements(buzzPosts).size() > 0;
+        return getElements(posts).size() > 0;
     }
 
     public void clickBuzzPostConfigButton(int index) {
-        WebElement configButton = getElements(buzzPostConfigButtons).get(index);
+        WebElement configButton = getElements(postConfigButtons).get(index);
         configButton.click();
     }
 
     public void setEditPostText(String text) {
-        setText(buzzPostEditTextArea, text);
+        setText(editTextArea, text);
     }
 
     public void clickModalPostButton() {
-        clickElement(buzzPostEditModalPostButton);
+        clickElement(editModalPostButton);
     }
 }
