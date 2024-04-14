@@ -4,9 +4,9 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
 import java.time.Duration;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 public class BasePage {
 
@@ -86,5 +86,10 @@ public class BasePage {
         }
 
         throw new NoSuchElementException("Element with the text " + text + " was not found");
+    }
+
+    public void uploadFile(By uploadField, String relativePath) {
+        String filePath = new File(relativePath).getAbsolutePath();
+        driver.findElement(uploadField).sendKeys(filePath);
     }
 }

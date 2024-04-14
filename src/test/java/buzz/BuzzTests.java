@@ -24,10 +24,17 @@ public class BuzzTests extends BaseTests_LoginLogout {
     }
 
     @Test
-    public void testNewBuzzPostAppearsInFeed() {
+    public void testNewBuzzPostWithTextAppearsInFeed() {
         String postText = buzzPage.createBuzzPostWithRandomText();
         buzzPage.clickBuzzPostNavLink();
         assertEquals(buzzPage.getBuzzPostText(1), postText, "First post text is not correct");
+    }
+
+    @Test
+    public void testNewBuzzPostWithImageAppearsInFeed() {
+        buzzPage.createBuzzPostWithPhoto("resources/orangehrm-logo.png");
+        buzzPage.clickBuzzPostNavLink();
+        assertTrue(buzzPage.isImagePresentInBuzzPost(1), "Image not present in first post");
     }
 
     @Test

@@ -16,12 +16,15 @@ public class BuzzPage extends BasePage {
     private By postTextArea = By.cssSelector(".oxd-buzz-post-input");
     private By postButton = By.cssSelector(".oxd-buzz-post .oxd-button");
     private By postsText = By.cssSelector(".orangehrm-buzz-post-body-text");
-    private By posts = By.cssSelector(".orangehrm-buzz-post");
+    private By postsImage = By.cssSelector(".orangehrm-buzz-photos");
+    private By posts = By.cssSelector(".orangehrm-buzz");
     private By postConfigButtons = By.cssSelector(".orangehrm-buzz-post-header-config .oxd-icon-button");
     private By postConfigMenuItems = By.cssSelector(".orangehrm-buzz-post-header-config-item");
     private By editTextArea = By.cssSelector(".orangehrm-buzz-post-modal-header-text .oxd-buzz-post-input");
-    private By editModalPostButton = By.cssSelector(".orangehrm-dialog-modal .oxd-button");
+    private By editModalPostButton = By.cssSelector(".orangehrm-buzz-post-modal-actions .oxd-button");
     private By deleteModalButtons = By.cssSelector(".orangehrm-dialog-popup .oxd-button");
+    private By shareButtons = By.cssSelector(".oxd-glass-button");
+    private By fileInputField = By.cssSelector(".oxd-file-input");
 
     public BuzzPage(WebDriver driver) {
         super(driver);
@@ -54,6 +57,12 @@ public class BuzzPage extends BasePage {
         return randomString;
     }
 
+    public void createBuzzPostWithPhoto(String relativePath) {
+        clickElementFromListByText(shareButtons, "Photos");
+        uploadFile(fileInputField, relativePath);
+        clickModalPostButton();
+    }
+
     /**
      * Gets text of specified buzz post
      * @param index starts at 1 (i.e. the first post)
@@ -72,6 +81,17 @@ public class BuzzPage extends BasePage {
      */
     public boolean isTextPresentInBuzzPost(int index, String text) {
         return getBuzzPostText(1).contains(text);
+    }
+
+    /**
+     * Checks if specified buzz post has an image element
+     * @param index starts at 1 (i.e. the first post)
+     * @return if post has an image element
+     */
+    public boolean isImagePresentInBuzzPost(int index) {
+        WebElement post = getElements(posts).get(index - 1);
+        List<WebElement> images = post.findElements(postsImage);
+        return !images.isEmpty();
     }
 
     /**
