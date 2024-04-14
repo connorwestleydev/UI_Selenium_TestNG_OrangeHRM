@@ -30,39 +30,6 @@ public class BuzzPage extends BasePage {
         super(driver);
     }
 
-    public boolean isNewsfeedTitleVisible() {
-        return getElement(newsfeedTitle).isDisplayed();
-    }
-
-    public void clickBuzzPostNavLink() {
-        clickElement(buzzNavLink);
-    }
-
-    public void setBuzzPostText(String text) {
-        setText(postTextArea, text);
-    }
-
-    public void clickPostButton() {
-        clickElement(postButton);
-    }
-
-    public void createBuzzPost(String postText) {
-        setBuzzPostText(postText);
-        clickPostButton();
-    }
-
-    public String createBuzzPostWithRandomText() {
-        String randomString = getRandomString();
-        createBuzzPost(randomString);
-        return randomString;
-    }
-
-    public void createBuzzPostWithPhoto(String relativePath) {
-        clickElementFromListByText(shareButtons, "Photos");
-        uploadFile(fileInputField, relativePath);
-        clickModalPostButton();
-    }
-
     /**
      * Gets text of specified buzz post
      * @param index starts at 1 (i.e. the first post)
@@ -71,6 +38,39 @@ public class BuzzPage extends BasePage {
     public String getBuzzPostText(int index) {
         List<WebElement> buzzPosts = getElements(postsText);
         return buzzPosts.get(index - 1).getText();
+    }
+
+    public void setBuzzPostText(String text) {
+        setText(postTextArea, text);
+    }
+
+    public void setEditPostText(String text) {
+        setText(editTextArea, text);
+    }
+
+    public void clickBuzzPostNavLink() {
+        clickElement(buzzNavLink);
+    }
+
+    public void clickPostButton() {
+        clickElement(postButton);
+    }
+
+    public void clickBuzzPostConfigButton(int index) {
+        WebElement configButton = getElements(postConfigButtons).get(index);
+        configButton.click();
+    }
+
+    public void clickModalPostButton() {
+        clickElement(editModalPostButton);
+    }
+
+    public boolean isNewsfeedTitleVisible() {
+        return getElement(newsfeedTitle).isDisplayed();
+    }
+
+    public boolean isAtLeastOneBuzzPostPresent() {
+        return getElements(posts).size() > 0;
     }
 
     /**
@@ -92,6 +92,23 @@ public class BuzzPage extends BasePage {
         WebElement post = getElements(posts).get(index - 1);
         List<WebElement> images = post.findElements(postsImage);
         return !images.isEmpty();
+    }
+
+    public void createBuzzPost(String postText) {
+        setBuzzPostText(postText);
+        clickPostButton();
+    }
+
+    public String createBuzzPostWithRandomText() {
+        String randomString = getRandomString();
+        createBuzzPost(randomString);
+        return randomString;
+    }
+
+    public void createBuzzPostWithPhoto(String relativePath) {
+        clickElementFromListByText(shareButtons, "Photos");
+        uploadFile(fileInputField, relativePath);
+        clickModalPostButton();
     }
 
     /**
@@ -135,22 +152,5 @@ public class BuzzPage extends BasePage {
         } else {
             throw new NoSuchElementException("No buzz posts are present");
         }
-    }
-
-    public boolean isAtLeastOneBuzzPostPresent() {
-        return getElements(posts).size() > 0;
-    }
-
-    public void clickBuzzPostConfigButton(int index) {
-        WebElement configButton = getElements(postConfigButtons).get(index);
-        configButton.click();
-    }
-
-    public void setEditPostText(String text) {
-        setText(editTextArea, text);
-    }
-
-    public void clickModalPostButton() {
-        clickElement(editModalPostButton);
     }
 }

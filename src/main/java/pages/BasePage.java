@@ -43,6 +43,24 @@ public class BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
     }
 
+    /**
+     * Clicks the first element from a list of elements with the specified text
+     * @param locator By variable to locate the matching elements
+     * @param text The text to look for within the elements
+     */
+    protected void clickElementFromListByText(By locator, String text) {
+        List<WebElement> elements = getElements(locator);
+
+        for (WebElement element : elements) {
+            if (element.getText().contains(text)) {
+                element.click();
+                return;
+            }
+        }
+
+        throw new NoSuchElementException("Element with the text " + text + " was not found");
+    }
+
     protected void clearField(By locator) {
         while(!getValue(locator).isEmpty()) {
             getElement(locator).sendKeys(Keys.BACK_SPACE);
@@ -68,24 +86,6 @@ public class BasePage {
                 driver.switchTo().window(windowHandle);
             }
         }
-    }
-
-    /**
-     * Clicks the first element from a list of elements with the specified text
-     * @param locator By variable to locate the matching elements
-     * @param text The text to look for within the elements
-     */
-    protected void clickElementFromListByText(By locator, String text) {
-        List<WebElement> elements = getElements(locator);
-
-        for (WebElement element : elements) {
-            if (element.getText().contains(text)) {
-                element.click();
-                return;
-            }
-        }
-
-        throw new NoSuchElementException("Element with the text " + text + " was not found");
     }
 
     public void uploadFile(By uploadField, String relativePath) {
