@@ -21,7 +21,7 @@ public class BuzzPage extends BasePage {
     private By postConfigButtons = By.cssSelector(".orangehrm-buzz-post-header-config .oxd-icon-button");
     private By postConfigMenuItems = By.cssSelector(".orangehrm-buzz-post-header-config-item");
     private By editTextArea = By.cssSelector(".orangehrm-buzz-post-modal-header-text .oxd-buzz-post-input");
-    private By editModalPostButton = By.cssSelector(".orangehrm-buzz-post-modal-actions .oxd-button");
+    private By editModalPostButton = By.cssSelector(".orangehrm-buzz-post-modal-actions button[type='submit']");
     private By deleteModalButtons = By.cssSelector(".orangehrm-dialog-popup .oxd-button");
     private By shareButtons = By.cssSelector(".oxd-glass-button");
     private By fileInputField = By.cssSelector(".oxd-file-input");
