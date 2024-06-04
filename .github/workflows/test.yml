@@ -19,7 +19,9 @@ jobs:
         run: mvn install
 
       - name: Use WebDriverManager to download drivers
-        uses: bonigarcia/webdrivermanager@v1
+        uses: bonigarcia/webdrivermanager@v5
+        with:
+          cache: true
 
       - name: Run tests with TestNG
         run: mvn test -Dtest=testng.xml
