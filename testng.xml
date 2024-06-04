@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression">
+    <test name="Run all tests">
+        <classes>
+            <class name="login.LoginTests"></class>
+            <class name="dashboard.DashboardTests"></class>
+            <class name="myInfo.PersonalDetailsTests"></class>
+            <class name="buzz.BuzzTests"></class>
+        </classes>
+    </test>
+</suite>
