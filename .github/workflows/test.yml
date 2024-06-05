@@ -1,8 +1,7 @@
 name: UI Tests
 
 on:
-  schedule:
-    - cron:  '30 17 * * *'
+  pull_request
 
 jobs:
   test:
