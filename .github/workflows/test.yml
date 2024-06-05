@@ -12,16 +12,12 @@ jobs:
       - name: Set up Java 21
         uses: actions/setup-java@v3
         with:
+          distribution: oracle
           java-version: 21
           cache: 'maven'
           
       - name: Install dependencies - Maven
         run: mvn install
-
-      - name: Use WebDriverManager to download drivers
-        uses: bonigarcia/webdrivermanager@v5
-        with:
-          cache: true
 
       - name: Run tests with TestNG
         run: mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng.xml
