@@ -24,4 +24,4 @@ jobs:
           cache: true
 
       - name: Run tests with TestNG
-        run: mvn test -Dtest=testng.xml
+        run: mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng.xml
