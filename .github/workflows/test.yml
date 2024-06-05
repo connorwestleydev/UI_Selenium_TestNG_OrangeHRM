@@ -18,10 +18,5 @@ jobs:
       - name: Install dependencies - Maven
         run: mvn install
 
-      - name: Use WebDriverManager to download drivers
-        uses: bonigarcia/webdrivermanager@v5
-        with:
-          cache: true
-
       - name: Run tests with TestNG
-        run: mvn test -Dtest=testng.xml
+        run: mvn test --DsuiteXmlFile=testng.xml
