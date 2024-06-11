@@ -37,6 +37,17 @@ public class LoginPage extends BasePage {
         return new DashboardPage(driver);
     }
 
+    /**
+     * Combines entering credentials and clicking the login button
+     * @param username
+     * @param password
+     * @return Dashboard page that user is directed to after login
+     */
+    public DashboardPage performLogin(String username, String password) {
+        enterCredentials(username, password);
+        return clickLoginButton();
+    }
+
     public void clearFields() {
         clearField(usernameField);
         clearField(passwordField);

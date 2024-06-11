@@ -14,55 +14,40 @@ import static org.testng.Assert.assertTrue;
 public class LoginTests extends BaseTests {
 
     @DataProvider
-    public Object[][] loginData() {
+    public Object[][] emptyLoginFieldsData() {
         return new Object[][] {
-                {"Admin",   "admin123", "Successful login"},
-                {"",        "",         "Empty credentials fields"},
-                {"",        "admin123", "Empty username"},
-                {"admin",   "",         "Empty password"},
-                {"test",    "test",     "Invalid credentials"}
+                {"",        "",},
+                {"",        "admin123"},
+                {"admin",   ""}
         };
     }
 
-    @Test (dataProvider = "loginData")
-    public void testLoginScenarios(String username, String password, String scenario) {
-        loginPage.enterCredentials(username, password);
-        DashboardPage dashboardPage = loginPage.clickLoginButton();
-
-        switch (scenario) {
-            case "Successful login":
-                verifySuccessfulLogin(dashboardPage);
-                dashboardPage.logout();
-                break;
-            case "Empty credentials fields":
-            case "Empty username":
-            case "Empty password":
-                verifyEmptyFields(username, password);
-                break;
-            case "Invalid credentials":
-                verifyInvalidCredentials();
-                break;
-            default:
-                throw new IllegalArgumentException("Unexpected scenario: " + scenario);
-        }
-
-        if (!scenario.equals("Successful login")) {loginPage.clearFields();}
-    }
-
-    private void verifySuccessfulLogin(DashboardPage dashboardPage) {
+    @Test
+    public void testSuccessfulLogin() {
+        DashboardPage dashboardPage = loginPage.performLogin("admin", "admin123");
         assertTrue(dashboardPage.isSignedIn(), "Not signed in");
         assertEquals(dashboardPage.getBreadcrumbText(), "Dashboard", "Dashboard not displayed");
+        dashboardPage.logout();
     }
 
-    private void verifyInvalidCredentials() {
-        assertEquals(loginPage.getErrorMessage(), "Invalid credentials", "Error message not correct");
-    }
-
-    private void verifyEmptyFields(String username, String password) {
+    @Test (dataProvider = "emptyLoginFieldsData")
+    public void testEmptyFieldsValidation(String username, String password) {
+        // Determine number of empty fields provided
         int expectedEmptyFields = (int) Stream.of(username, password).filter(String::isEmpty).count();
+
+        loginPage.performLogin(username, password);
         List<String> fieldValidationMessages = loginPage.getValidationMessages();
 
         assertEquals(fieldValidationMessages.size(), expectedEmptyFields, "Validation not triggered");
         fieldValidationMessages.forEach(i -> assertEquals(i, "Required", "Required text not present"));
+
+        loginPage.clearFields();
+    }
+
+    @Test
+    public void testInvalidCredentials() {
+        loginPage.performLogin("username", "password");
+        assertEquals(loginPage.getErrorMessage(), "Invalid credentials", "Error message not correct");
+        loginPage.clearFields();
     }
 }
