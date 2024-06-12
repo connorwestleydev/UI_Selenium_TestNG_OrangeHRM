@@ -15,7 +15,7 @@ which has a manual trigger event.
 ## Running tests locally
 ### Pre-requisites
 - [Java Development Kit (JDK) 21 or higher](https://www.oracle.com/uk/java/technologies/downloads/)
-- [Maven 3.2.5 or higher](https://maven.apache.org/download.cgi)
+- [Maven 3.9.7](https://maven.apache.org/download.cgi)
 
 ### Installation
 1. Clone the repository:
