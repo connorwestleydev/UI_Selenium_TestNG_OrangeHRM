@@ -29,20 +29,7 @@ public class PersonalDetailsPage extends BasePage {
 
     public void selectNationality(String desiredNationality) {
         waitUntilDropdownDisplayed();
-        List<WebElement> nationalities = getElements(dropdownItems);
-
-        for (WebElement nationality : nationalities) {
-            nationality = wait.until(ExpectedConditions.elementToBeClickable(nationality));
-
-            try {
-                if (nationality.getText().equals(desiredNationality)) {
-                    nationality.click();
-                    break;
-                }
-            } catch (StaleElementReferenceException e) {
-                System.out.println(e.getMessage());
-            }
-        }
+        clickElementFromListByText(dropdownItems, desiredNationality);
     }
 
     public String getSelectedNationality() {
