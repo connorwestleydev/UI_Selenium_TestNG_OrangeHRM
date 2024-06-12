@@ -2,7 +2,8 @@
 
 ## Overview
 This is a UI test automation project built using Selenium WebDriver 4 and TestNG in Java with Maven as the build tool.
-I have written a [blog post]() discussing some of the key features of the project as well as discussion about 
+I have written a [blog post](https://connorwestleytesting.wordpress.com/2024/04/09/web-ui-automation-project-using-selenium-webdriver-4-and-testng-in-java/) 
+discussing some of the key features of the project as well as discussion about 
 the challenges and lessons learned while creating it.
 
 In summary, the project demonstrates various aspects of web UI automation, such as utilising the Page Object Model (POM),
