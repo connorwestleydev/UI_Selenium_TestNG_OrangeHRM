@@ -20,7 +20,6 @@ public class BaseTests {
         ChromeOptions options = new ChromeOptions();
         options.addArguments(Arrays.asList(
                 "--headless",
-                "--no-sandbox",
                 "--disable-dev-shm-usage",
                 "--disable-gpu",
                 "--window-size=1920,1080"
